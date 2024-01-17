@@ -407,12 +407,6 @@ func (c *Client) receive() error {
 		// add expected echo reply fields
 		p.addFields(fechoReply, false)
 
-		// return an error if reply packet was too small
-		if p.length() < c.Length {
-			return Errorf(ShortReply, "received short reply (%d bytes)",
-				p.length())
-		}
-
 		// add expected received stats fields
 		p.addReceivedStatsFields(c.ReceivedStats)
 

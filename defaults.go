@@ -74,6 +74,7 @@ const (
 	DefaultAllowDSCP     = true
 	DefaultSetSrcIP      = false
 	DefaultSetECN        = false
+	DefaultResponseLen   = -1
 )
 
 // DefaultBindAddrs are the default bind addresses.

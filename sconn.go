@@ -231,7 +231,11 @@ func (sc *sconn) serveEcho(p *packet) (closed bool, err error) {
 	}
 
 	// set length
-	p.setLen(sc.params.Length)
+	if sc.listener.ServerConfig.ResponseLen != DefaultResponseLen {
+		p.setLen(sc.listener.ServerConfig.ResponseLen - 40) // 40 bytes are saved for IP4 header
+	} else {
+		p.setLen(sc.params.Length)
+	}
 
 	// fill payload
 	if sc.filler != nil {

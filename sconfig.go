@@ -21,6 +21,7 @@ type ServerConfig struct {
 	SetSrcIP    bool
 	TimeSource  TimeSource
 	ThreadLock  bool
+	ResponseLen int
 }
 
 // NewServerConfig returns a new ServerConfig with the default settings.
@@ -41,5 +42,6 @@ func NewServerConfig() *ServerConfig {
 		SetSrcIP:    DefaultSetSrcIP,
 		TimeSource:  DefaultTimeSource,
 		ThreadLock:  DefaultThreadLock,
+		ResponseLen: DefaultResponseLen,
 	}
 }

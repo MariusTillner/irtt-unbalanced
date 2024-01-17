@@ -66,6 +66,7 @@ func serverUsage() {
 	printf("               routing, but increases per-packet heap allocations)")
 	printf("--ecn          Ship ECN bits to be logged by the client.  Forces --set-src-ip, disables UDP replies")
 	printf("--thread       lock request handling goroutines to OS threads")
+	printf("--responselen  sets package length/size for server response, enables unbalanced traffic")
 	printf("-h             show help")
 	printf("-v             show version")
 	printf("")
@@ -103,6 +104,7 @@ func runServerCLI(args []string) {
 	var ecn = fs.Bool("ecn", DefaultSetECN, "enable ECN capture - disables UDP replies from server")
 	var lockOSThread = fs.Bool("thread", DefaultThreadLock, "thread")
 	var version = fs.BoolP("version", "v", false, "version")
+	var responseLen = fs.Int("responselen", DefaultResponseLen, "server response package length")
 	fs.Parse(args)
 
 	// start profiling, if enabled in build
@@ -162,6 +164,7 @@ func runServerCLI(args []string) {
 	cfg.IPVersion = ipVer
 	cfg.SetSrcIP = *setSrcIP || *ecn
 	cfg.ThreadLock = *lockOSThread
+	cfg.ResponseLen = *responseLen
 
 	// create server
 	s := NewServer(cfg)
